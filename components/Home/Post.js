@@ -105,16 +105,16 @@ const Caption = ({ post }) => (
 );
 const CommentCaption = ({ post }) => (
     <View style={styles.captionContainer}>
-  {!!post.comments.length && <Text style={{ color: "grey" }} numberOfLines={1}>
-    View {post.comments.length > 1 ? " all" : ""} {post.comments.length}
-    {post.comments.length > 1 ? " comments" : " comment"}
+  {!!post?.comments.length && <Text style={{ color: "grey" }} numberOfLines={1}>
+    View {post?.comments.length > 1 ? " all" : ""} {post.comments.length}
+    {post?.comments.length > 1 ? " comments" : " comment"}
   </Text>}
   </View>
 );
 const Comments = ({post})=>(
     <>
     {
-        post.comments.map((comment, index)=>(
+        post?.comments.map((comment, index)=>(
             <View key={index} style={styles.commentContainer}>
                 <Text style={styles.commentText}>
                     <Text style={styles.commentTextUser}>{comment.user}</Text>{' '}

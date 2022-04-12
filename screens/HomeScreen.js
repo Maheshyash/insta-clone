@@ -1,5 +1,5 @@
 import { SafeAreaView, Platform, StyleSheet, StatusBar, ScrollView } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Home/Header'
 import Stories from '../components/Home/Stories'
 import Post from '../components/Home/Post'
@@ -8,17 +8,18 @@ import { bottomTabIcons } from '../data/bottomTabIcons'
 import BottomTabs from '../components/Home/BottomTabs'
 import { db } from '../firebase'
 export default function HomeScreen({navigation}) {
+  const [posts,setPosts] = useState([])
   useEffect(()=>{
-    // db.collectionGroup('posts').onSnapshot(snapchat=>{
-    //   console.log(snapchat.docs.map(doc=> doc.data()))
-    // })
+    db.collectionGroup('posts').onSnapshot(snapchat=>{
+      setPosts(snapchat.docs.map(doc=> doc.data()))
+    })
   },[])
   return (
     <SafeAreaView style={styles.homeScreenContianer}>
       <Header navigation={navigation}/>
       <Stories />
       <ScrollView showsVerticalScrollIndicator={false}>
-        {POSTS.map((post, index)=>(
+        {posts.map((post, index)=>(
           <Post post ={post} key={index}/>
         ))}
       </ScrollView>
